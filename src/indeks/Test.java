@@ -26,7 +26,7 @@ public class Test {
 	    	  
 	    	  char[] tabela = naslov.toCharArray();
 	    	  int c = tabela.length - 1;
-	    	  while (tabela[c] != '/') {
+	  while (tabela[c] != '/' && tabela[c] != '\\') {
 	    		  tabela[c] = '\0';
 	    		  c--;
 	    	  }
