@@ -76,6 +76,10 @@ public class Test {
 			  			if (d > 2 &&  vrstica[d-1].matches("\\d+") && vrstica[0].equals("Chapter") && vrstica[1].matches("\\d+")) {
 			  				stevec++;
 			  			}
+						
+						if (d == 2 && vrstica[0].equals("CHAPTER") && vrstica[1].matches("\\d+")) {
+			  				stevec++;
+			  			}
 
 			  			for (int j = 0; j < d; j++) {
 			  				beseda = vrstica[j].toLowerCase();
