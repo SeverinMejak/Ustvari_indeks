@@ -26,7 +26,7 @@ public class Test {
 	    	  
 	    	  char[] tabela = naslov.toCharArray();
 	    	  int c = tabela.length - 1;
-	  while (tabela[c] != '/' && tabela[c] != '\\') {
+	    	  while (tabela[c] != '/' && tabela[c] != '\\') {
 	    		  tabela[c] = '\0';
 	    		  c--;
 	    	  }
@@ -52,27 +52,50 @@ public class Test {
 		  		int l = sez.length;
 		  		String[] vrstica;
 		  		String beseda;
+		  		boolean ali = false;
 		  		
 		  		for (int i = 0; i < l; i++) {
 		  			vrstica = sez[i].trim().split("\\W+");
 		  			d = vrstica.length;
-		  			if (d == 1 && vrstica[0].matches("\\d+")) {
-		  				stevec += 1;
+		  			//if (d == 1 && vrstica[0].matches("\\d+")) {
+		  			
+		  			if(d==1 && vrstica[0].equals("Introduction")) {
+		  				ali = true;
 		  			}
-		  			for (int j = 0; j < d; j++) {
-		  				beseda = vrstica[j].toLowerCase();
-		  				if (beseda.length() > 3) {
-		  					if (beseda.substring(beseda.length() - 1) == "s"){
-		  						beseda = beseda.substring(0, beseda.length() - 1);
-		  					}
-		  					if (slovar.containsKey(beseda) && slovar.get(beseda).lastElement() != stevec) {
-		  						slovar.get(beseda).add(stevec);
-		  					} else {
-		  						Vector<Integer> mnoz = new Vector<Integer>();
-		  						mnoz.add(stevec);
-		  						slovar.put(beseda, mnoz);
-		  					}
-		  				}
+		  			
+		  			if(d == 2 && vrstica[0].equals("Cookbook") && vrstica[1].equals("sources")) {
+		  				ali = false;
+		  			}
+		  			
+		  			if(ali) {
+		  				
+			  			if (d == 8 && vrstica[0].matches("\\d+") && vrstica[1].equals("The") && vrstica[2].equals("Discursive")) {
+			  				stevec++;
+			  			}
+			  			
+			  			if (d > 2 &&  vrstica[d-1].matches("\\d+") && vrstica[0].equals("Chapter") && vrstica[1].matches("\\d+")) {
+			  				stevec++;
+			  			}
+
+			  			for (int j = 0; j < d; j++) {
+			  				beseda = vrstica[j].toLowerCase();
+			  				if (beseda.matches("[a-z]+")) {
+				  				if (beseda.length() > 3) {
+				  					/*if(beseda.endsWith("s")) {
+				  						beseda = beseda.substring(0, beseda.length() - 1);
+				  					}*/
+				  					if (slovar.containsKey(beseda)){
+				  						if(slovar.get(beseda).lastElement() != stevec) {
+				  							slovar.get(beseda).add(stevec);
+				  						}
+				  					} else {
+				  						Vector<Integer> mnoz = new Vector<Integer>();
+				  						mnoz.add(stevec);
+				  						slovar.put(beseda, mnoz);
+				  					}
+				  				}
+			  				}
+			  			}
 		  			}
 	
 		  		}
@@ -86,10 +109,9 @@ public class Test {
 		  		
 		  		dokument.close();
 		  		writer.close();
-		    	  
+		    	
 			  } else {
 				  System.exit(0);
-			  }	
-	
+			  }
 	}
 }
