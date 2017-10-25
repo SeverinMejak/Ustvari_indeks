@@ -66,6 +66,14 @@ public class Test {
 		  			if(d == 2 && vrstica[0].equals("Cookbook") && vrstica[1].equals("sources")) {
 		  				ali = false;
 		  			}
+					
+					if (d == 2 && vrstica[0].equals("CHAPTER") && vrstica[1].matches("\\d+")) {
+			  				if( stevec%2 == 1) {
+			  					stevec += 2;
+			  				} else {
+			  					stevec++;
+			  				}
+			  			}
 		  			
 		  			if(ali) {
 		  				
